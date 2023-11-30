@@ -1,0 +1,1 @@
+ALTER TABLE `characters` ADD `leveling_status` LONGTEXT NOT NULL DEFAULT '[]';
