@@ -18,7 +18,7 @@ end)
 -----------------------------------------------------------
 
 -- When first joining the game, we request the player to be added into the list
--- The following list handles the players and their metabolism correctly.
+-- The following list handles the players and their leveling correctly.
 function RegisterConnectedPlayer(source, identifier, charidentifier, data)
     local _source         = source
 
