@@ -4,7 +4,7 @@ ConnectedPlayers = {}
 --[[ General Events  ]]--
 -----------------------------------------------------------
 
-AddEventHandler('onResourceStart', function(resourceName)
+AddEventHandler('onResourceStop', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then
       return
     end
