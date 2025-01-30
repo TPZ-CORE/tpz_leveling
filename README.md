@@ -38,5 +38,5 @@ LevelingAPI.AddPlayerLevelExperience(<targetSource>, <levelType>, <experienceVal
 LevelingAPI.AddPlayerLevel(<targetSource>, <levelType>, <levelValue>)
 
 local LevelData = LevelingAPI.GetLevelExperience(<targetSource>, <levelType>)
-
+print(LevelData.level, LevelData.experience)
 ```
