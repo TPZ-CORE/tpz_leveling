@@ -22,15 +22,21 @@ local LevelData = exports.tpz_leveling:GetLevelTypeExperienceData('mining')
 print(LevelData.level, LevelData.experience)
 ```
 
-## Add level experience on a leveling type.
+## Server Side Development API
+
+### Get API Object
+
+```lua
+local LevelingAPI = exports.tpz_leveling:getAPI()
+```
 
 ```lua
 
 -- Level Types: hunting, fishing, lumberjack, mining, farming.
--- If targetSource set to nil, it will get the player source, the targetSource is used only if you want to add level experience
--- on another player and not the one which the event is triggered.
 
-TriggerServerEvent("tpz_leveling:AddLevelExperience", <targetSource>, <levelType>, <experienceValue>) -- Client Side
-TriggerEvent("tpz_leveling:AddLevelExperience", <targetSource>, <levelType>, experienceValue>) -- Server Side
+LevelingAPI.AddPlayerLevelExperience(<targetSource>, <levelType>, <experienceValue>)
+LevelingAPI.AddPlayerLevel(<targetSource>, <levelType>, <levelValue>)
+
+local LevelData = LevelingAPI.GetLevelExperience(<targetSource>, <levelType>)
 
 ```
