@@ -4,7 +4,7 @@ ConnectedPlayers = {}
 --[[ General Events  ]]--
 -----------------------------------------------------------
 
-AddEventHandler('onResourceStop', function(resourceName)
+AddEventHandler('onResourceStart', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then
       return
     end
@@ -18,7 +18,7 @@ end)
 -----------------------------------------------------------
 
 -- When first joining the game, we request the player to be added into the list
--- The following list handles the players and their leveling correctly.
+-- The following list handles the players and their metabolism correctly.
 function RegisterConnectedPlayer(source, identifier, charidentifier, data)
     local _source         = source
 
@@ -36,26 +36,35 @@ function RegisterConnectedPlayer(source, identifier, charidentifier, data)
 
 end
 
-GetConnectedPlayers = function()
-    local data = { list = {}, players = 0 }
+-----------------------------------------------------------
+--[[ Base Events  ]]--
+-----------------------------------------------------------
 
-    local finished = false
+-- Save player leveling progress.
+AddEventHandler('playerDropped', function (reason)
+    local _source = source
 
-    for index, player in pairs (ConnectedPlayers) do
-
-        data.players = data.players + 1
-
-        table.insert(data.list, player)
-
-        if next(ConnectedPlayers, index) == nil then
-            finished = true
-        end
-
+    if ConnectedPlayers[_source] == nil then
+        return
     end
 
-    while not finished do
-        Wait(50)
-    end
+    local playerData = ConnectedPlayers[_source]
 
-    return data
-end
+    local LevelingParameters = { 
+        ['lumberjack'] = { level = playerData['lumberjack'].level, experience = playerData['lumberjack'].experience },
+        ['hunting']    = { level = playerData['hunting'].level,    experience = playerData['hunting'].experience    },
+        ['farming']    = { level = playerData['farming'].level,    experience = playerData['farming'].experience    },
+        ['mining']     = { level = playerData['mining'].level,     experience = playerData['mining'].experience     },
+        ['fishing']    = { level = playerData['fishing'].level,    experience = playerData['fishing'].experience    },
+    }
+
+    local UpdateParameters = { 
+        ['identifier']      = playerData.identifier, 
+        ['charidentifier']  = playerData.charidentifier, 
+        ['leveling_status'] = json.encode(LevelingParameters)
+    }
+
+    exports.ghmattimysql:execute("UPDATE `characters` SET `leveling_status` = @leveling_status WHERE `identifier` = @identifier AND `charidentifier` = @charidentifier", UpdateParameters)
+
+    ConnectedPlayers[_source] = nil
+end)
