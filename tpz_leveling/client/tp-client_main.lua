@@ -7,12 +7,15 @@ local LevelingData = {}
 
 GetLevelTypeExperienceData = function(levelType)
 
+    if LevelingData[levelType] == nil then
+        return { level = 1, experience = 0}
+    end
+    
 	local level      = LevelingData[levelType].level
 	local experience = LevelingData[levelType].experience
 
 	return { level = level, experience = experience }
 end
-
 -----------------------------------------------------------
 --[[ Base Events ]]--
 -----------------------------------------------------------
