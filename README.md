@@ -18,9 +18,8 @@
 
 ```lua
 -- Level Types: hunting, fishing, lumberjack, mining, farming.
-local data = exports.tpz_leveling:GetLevelTypeExperienceData(<levelType>)
-
-print(data.level, data.experience)
+local LevelData = exports.tpz_leveling:GetLevelTypeExperienceData('mining')
+print(LevelData.level, LevelData.experience)
 ```
 
 ## Add level experience on a leveling type.
