@@ -51,8 +51,7 @@ GetLevelExperience = function(source, actionType)
         return 1, 0
     end
 
-    local levelData = ConnectedPlayers[_source][actionType]
-    return levelData.level, levelData.experience
+    return ConnectedPlayers[_source][actionType]
 end
 
 -----------------------------------------------------------
