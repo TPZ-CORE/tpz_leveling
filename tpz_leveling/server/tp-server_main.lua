@@ -47,8 +47,8 @@ end
 GetLevelExperience = function(source, actionType)
     local _source = source
 
-    if ConnectedPlayers[_source] == nil or ConnectedPlayers[_source] and ConnectedPlayers[_source][actionType] == nilthen
-        return 1, 0
+    if ConnectedPlayers[_source] == nil or ConnectedPlayers[_source] and ConnectedPlayers[_source][actionType] == nil then
+        return { level = 1, experience = 0 }
     end
 
     return ConnectedPlayers[_source][actionType]
