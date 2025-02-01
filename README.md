@@ -46,7 +46,7 @@ print(LevelData.level, LevelData.experience)
 The specified event below is triggered when player **leveling** data loaded after a player is selecting a character.
 
 ```lua
-AddEventHandler("tpz_leveling:playerDataLoaded", function ()
+AddEventHandler("tpz_leveling:client:playerDataLoaded", function ()
 	-- todo - nothing (Can be used for HUD)
 end)
 ```
