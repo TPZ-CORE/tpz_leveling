@@ -40,3 +40,13 @@ LevelingAPI.AddPlayerLevel(<targetSource>, <levelType>, <levelValue>)
 local LevelData = LevelingAPI.GetLevelExperience(<targetSource>, <levelType>)
 print(LevelData.level, LevelData.experience)
 ```
+
+## Events
+
+The specified event below is triggered when player **leveling** data loaded after a player is selecting a character.
+
+```lua
+AddEventHandler("tpz_leveling:playerDataLoaded", function ()
+	-- todo - nothing (Can be used for HUD)
+end)
+```
