@@ -41,7 +41,7 @@ local LevelData = LevelingAPI.GetLevelExperience(<targetSource>, <levelType>)
 print(LevelData.level, LevelData.experience)
 ```
 
-## Events
+### Events
 
 The specified event below is triggered when player **leveling** data loaded after a player is selecting a character.
 
