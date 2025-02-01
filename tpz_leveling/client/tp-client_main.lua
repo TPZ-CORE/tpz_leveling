@@ -33,8 +33,8 @@ AddEventHandler("tpz_core:isPlayerReady", function()
 
 end)
 
-RegisterNetEvent("tpz_leveling:playerDataLoaded")
-AddEventHandler("tpz_leveling:playerDataLoaded", function ()
+RegisterNetEvent("tpz_leveling:client:playerDataLoaded")
+AddEventHandler("tpz_leveling:client:playerDataLoaded", function ()
 	-- todo - nothing (Can be used for HUD)
 end)
 
