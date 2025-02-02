@@ -10,4 +10,9 @@ server_scripts { 'server/*.lua' }
 client_scripts { 'client/*.lua' }
 shared_scripts { 'config.lua }
 
+dependencies {
+    'tpz_core',
+    'tpz_characters',
+}
+
 exports {  "GetLevelTypeExperienceData" }
