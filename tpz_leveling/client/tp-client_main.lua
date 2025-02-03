@@ -41,7 +41,7 @@ end)
 RegisterNetEvent("tpz_leveling:client:registerPlayerData")
 AddEventHandler("tpz_leveling:client:registerPlayerData", function(data)
     LevelingData = data
-	TriggerEvent("tpz_leveling:playerDataLoaded")
+	TriggerEvent("tpz_leveling:client:playerDataLoaded")
 end)
 
 if Config.DevMode then
