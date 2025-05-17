@@ -28,11 +28,20 @@ function RegisterConnectedPlayer(source, identifier, charidentifier, data)
     ConnectedPlayers[_source]['identifier']        = identifier
     ConnectedPlayers[_source]['charidentifier']    = charidentifier
 
-    ConnectedPlayers[_source]['lumberjack']        = { level = data['lumberjack'].level or 1, experience = data['lumberjack'].experience or 0 }
-    ConnectedPlayers[_source]['hunting']           = { level = data['hunting'].level or 1,    experience = data['hunting'].experience or 0    }
-    ConnectedPlayers[_source]['farming']           = { level = data['farming'].level or 1,    experience = data['farming'].experience or 0    }
-    ConnectedPlayers[_source]['mining']            = { level = data['mining'].level or 1,     experience = data['mining'].experience or 0     }
-    ConnectedPlayers[_source]['fishing']           = { level = data['fishing'].level or 1,    experience = data['fishing'].experience or 0    }
+    if GetTableLength(data) <= 0 then -- New player on join has invalid data (no data), we create it..
+
+        data['lumberjack'] = { level = 0, experience = 0}
+        data['hunting']    = { level = 0, experience = 0}
+        data['farming']    = { level = 0, experience = 0}
+        data['mining']     = { level = 0, experience = 0}
+        data['fishing']    = { level = 0, experience = 0}
+    end
+
+    ConnectedPlayers[_source]['lumberjack']        = { level = data['lumberjack'].level, experience = data['lumberjack'].experience }
+    ConnectedPlayers[_source]['hunting']           = { level = data['hunting'].level,    experience = data['hunting'].experience    }
+    ConnectedPlayers[_source]['farming']           = { level = data['farming'].level,    experience = data['farming'].experience    }
+    ConnectedPlayers[_source]['mining']            = { level = data['mining'].level,     experience = data['mining'].experience     }
+    ConnectedPlayers[_source]['fishing']           = { level = data['fishing'].level,    experience = data['fishing'].experience    }
 
 end
 
