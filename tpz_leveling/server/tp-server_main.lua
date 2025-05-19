@@ -22,7 +22,7 @@ AddPlayerLevelExperience = function(source, actionType, value)
 
     levelData.experience = levelData.experience + value
 
-    if levelData.experience >= Config.RequiredLevelExperience then
+    if levelData.experience >= Config.RequiredLevelExperience[actionType] then
         levelData.experience = 0
 
         levelData.level = levelData.level + 1
