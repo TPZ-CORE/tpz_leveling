@@ -1,6 +1,17 @@
 ConnectedPlayers = {}
 
 -----------------------------------------------------------
+--[[ Local Functions  ]]--
+-----------------------------------------------------------
+
+-- @GetTableLength returns the length of a table.
+local function GetTableLength(T)
+    local count = 0
+    for _ in pairs(T) do count = count + 1 end
+    return count
+end
+
+-----------------------------------------------------------
 --[[ General Events  ]]--
 -----------------------------------------------------------
 
@@ -20,7 +31,7 @@ end)
 -- When first joining the game, we request the player to be added into the list
 -- The following list handles the players and their metabolism correctly.
 function RegisterConnectedPlayer(source, identifier, charidentifier, data)
-    local _source         = source
+    local _source = source
 
     ConnectedPlayers[_source]                      = {}
     ConnectedPlayers[_source]['source']            = _source
@@ -31,12 +42,13 @@ function RegisterConnectedPlayer(source, identifier, charidentifier, data)
     if data == nil or data and GetTableLength(data) <= 0 then -- New player on join has invalid data (no data), we create it..
 
         data = {}
-        
+
         data['lumberjack'] = { level = 0, experience = 0}
         data['hunting']    = { level = 0, experience = 0}
         data['farming']    = { level = 0, experience = 0}
         data['mining']     = { level = 0, experience = 0}
         data['fishing']    = { level = 0, experience = 0}
+        data['criminal']   = { level = 0, experience = 0}
     end
 
     ConnectedPlayers[_source]['lumberjack']        = { level = data['lumberjack'].level, experience = data['lumberjack'].experience }
@@ -44,7 +56,9 @@ function RegisterConnectedPlayer(source, identifier, charidentifier, data)
     ConnectedPlayers[_source]['farming']           = { level = data['farming'].level,    experience = data['farming'].experience    }
     ConnectedPlayers[_source]['mining']            = { level = data['mining'].level,     experience = data['mining'].experience     }
     ConnectedPlayers[_source]['fishing']           = { level = data['fishing'].level,    experience = data['fishing'].experience    }
+    ConnectedPlayers[_source]['criminal']          = { level = data['criminal'].level,    experience = data['criminal'].experience    }
 
+    TriggerClientEvent("tpz_leveling:client:registerPlayerData", _source, ConnectedPlayers[_source] )
 end
 
 -----------------------------------------------------------
@@ -67,6 +81,7 @@ AddEventHandler('playerDropped', function (reason)
         ['farming']    = { level = playerData['farming'].level,    experience = playerData['farming'].experience    },
         ['mining']     = { level = playerData['mining'].level,     experience = playerData['mining'].experience     },
         ['fishing']    = { level = playerData['fishing'].level,    experience = playerData['fishing'].experience    },
+        ['criminal']   = { level = playerData['criminal'].level,    experience = playerData['criminal'].experience    },
     }
 
     local UpdateParameters = { 
@@ -79,4 +94,3 @@ AddEventHandler('playerDropped', function (reason)
 
     ConnectedPlayers[_source] = nil
 end)
-
