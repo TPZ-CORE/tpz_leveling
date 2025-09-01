@@ -28,8 +28,10 @@ function RegisterConnectedPlayer(source, identifier, charidentifier, data)
     ConnectedPlayers[_source]['identifier']        = identifier
     ConnectedPlayers[_source]['charidentifier']    = charidentifier
 
-    if GetTableLength(data) <= 0 then -- New player on join has invalid data (no data), we create it..
+    if data == nil or data and GetTableLength(data) <= 0 then -- New player on join has invalid data (no data), we create it..
 
+        data = {}
+        
         data['lumberjack'] = { level = 0, experience = 0}
         data['hunting']    = { level = 0, experience = 0}
         data['farming']    = { level = 0, experience = 0}
@@ -77,3 +79,4 @@ AddEventHandler('playerDropped', function (reason)
 
     ConnectedPlayers[_source] = nil
 end)
+
