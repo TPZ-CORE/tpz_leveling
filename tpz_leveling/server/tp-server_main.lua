@@ -82,7 +82,12 @@ AddEventHandler("tpz_leveling:server:requestPlayerData", function()
 
         -- We are registering the connected player with its metabolism data to be used and updated properly.
         RegisterConnectedPlayer(_source, identifier, charidentifier, LevelingData)
-        TriggerClientEvent("tpz_leveling:client:registerPlayerData", _source, LevelingData )
+                
+        if GetTableLength(LevelingData) ~= 0 then
+            TriggerClientEvent("tpz_leveling:client:registerPlayerData", _source, LevelingData )
+        end
+            
     end)
 
 end)
+
