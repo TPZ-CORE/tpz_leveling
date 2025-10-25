@@ -1,17 +1,6 @@
 local TPZ = exports.tpz_core:getCoreAPI()
 
 -----------------------------------------------------------
---[[ Local Functions  ]]--
------------------------------------------------------------
-
--- @GetTableLength returns the length of a table.
-function GetTableLength(T)
-    local count = 0
-    for _ in pairs(T) do count = count + 1 end
-    return count
-end
-
------------------------------------------------------------
 --[[ Functions  ]]--
 -----------------------------------------------------------
 
@@ -83,11 +72,12 @@ AddEventHandler("tpz_leveling:server:requestPlayerData", function()
         -- We are registering the connected player with its metabolism data to be used and updated properly.
         RegisterConnectedPlayer(_source, identifier, charidentifier, LevelingData)
                 
-        if GetTableLength(LevelingData) ~= 0 then
+        if TPZ.GetTableLength(LevelingData) ~= 0 then
             TriggerClientEvent("tpz_leveling:client:registerPlayerData", _source, LevelingData )
         end
             
     end)
 
 end)
+
 
