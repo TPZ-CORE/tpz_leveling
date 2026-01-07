@@ -17,7 +17,7 @@ AddPlayerLevelExperience = function(source, actionType, value)
         levelData.level = levelData.level + 1
     end
 
-    TriggerClientEvent("tpz_leveling:client:updateByActionType", _source, levelData.level, levelData.experience )
+    TriggerClientEvent("tpz_leveling:client:updateByActionType", _source, actionType, levelData.level, levelData.experience )
 end
 
 -- Add player level by the actionType.
@@ -27,7 +27,7 @@ AddPlayerLevel = function(source, actionType, value)
 
     levelData.level = levelData.level + value
 
-    TriggerClientEvent("tpz_leveling:client:updateByActionType", _source, levelData.level, levelData.experience )
+    TriggerClientEvent("tpz_leveling:client:updateByActionType", _source, actionType, levelData.level, levelData.experience )
 end
 
 -- Get player level and experience by the actionType.
@@ -79,5 +79,6 @@ AddEventHandler("tpz_leveling:server:requestPlayerData", function()
     end)
 
 end)
+
 
 
