@@ -10,8 +10,9 @@ exports('getAPI', function()
     end
     
     self.GetLevelExperience = function(source, actionType)
-        GetLevelExperience(source, actionType)
+        return GetLevelExperience(source, actionType)
     end
 
     return self
 end)
+
