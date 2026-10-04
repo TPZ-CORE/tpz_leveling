@@ -9,6 +9,11 @@ AddPlayerLevelExperience = function(source, actionType, value)
     local _source    = source
     local levelData  = ConnectedPlayers[_source][actionType]
 
+    if ConnectedPlayers[_source][actionType] == nil then 
+        print('Attempting to add level experience on a non-registered level type: {' .. actionType .. '}')
+        return
+    end
+    
     levelData.experience = levelData.experience + value
 
     if levelData.experience >= Config.RequiredLevelExperience[actionType] then
@@ -25,6 +30,11 @@ AddPlayerLevel = function(source, actionType, value)
     local _source    = source
     local levelData  = ConnectedPlayers[_source][actionType]
 
+    if ConnectedPlayers[_source][actionType] == nil then 
+        print('Attempting to add level experience on a non-registered level type: {' .. actionType .. '}')
+        return
+    end
+    
     levelData.level = levelData.level + value
 
     TriggerClientEvent("tpz_leveling:client:updateByActionType", _source, actionType, levelData.level, levelData.experience )
@@ -35,6 +45,11 @@ GetLevelExperience = function(source, actionType)
     local _source = source
 
     if ConnectedPlayers[_source] == nil or ConnectedPlayers[_source] and ConnectedPlayers[_source][actionType] == nil then
+        return { level = 1, experience = 0 }
+    end
+
+    if ConnectedPlayers[_source][actionType] == nil then 
+        print('Attempting to retrieve level experience on a non-registered level type: {' .. actionType .. '}')
         return { level = 1, experience = 0 }
     end
 
